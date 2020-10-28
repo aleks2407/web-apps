@@ -7,19 +7,17 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const config = require('./config');
-const host = 'localhost';
 
 // - setup -
 const FILES_DIR = __dirname + '/text-files';
 // create the express app
-const app = express();
+_;
 
 // - use middleware -
 // allow Cross Origin Resource Sharing
 app.use(cors());
 // parse the body
-app.use(bodyParser.json());
-
+_;
 
 // https://github.com/expressjs/morgan#write-logs-to-a-file
 const accessLogStream = fs.createWriteStream(
@@ -31,7 +29,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 app.use(morgan('dev'));
 
 // statically serve the frontend
-app.use(express.static('public'));
+_;
 
 // - declare routes -
 // helpful hint:
@@ -47,8 +45,7 @@ app.get('/files', (req, res, next) => {
   fs.readdir(FILES_DIR, (err, list) => {
     if (err && err.code === 'ENOENT') {
       res.status(404).end();
-      console.error(err);
-      return;
+      _;
     }
     if (err) {
       // https://expressjs.com/en/guide/error-handling.html
@@ -62,19 +59,16 @@ app.get('/files', (req, res, next) => {
 
 // read a file
 //  called by action: fetchAndLoadFile
-app.get('/files/:action', (req, res, next) => {
-  const fileName = req.params.action;
-
-  fs.readFile(`${FILES_DIR}/${fileName}`, 'utf-8', (err, fileText) => {
-    if (err && err.code === 'ENOENT') {
-      res.status(404).end();
-      console.error(err);
+app._('_', (req, res, next) => {
+  const fileName = req.params.name;
+  fs._(`${FILES_DIR}/${fileName}`, _, (err, fileText) => {
+    if (_) {
+      _;
       return;
     }
-    if (err) {
-      // https://expressjs.com/en/guide/error-handling.html
-      next(err);
-      return;
+    if (_) {
+      _;
+      _;
     }
 
     const responseData = {
@@ -87,16 +81,13 @@ app.get('/files/:action', (req, res, next) => {
 
 // write a file
 //  called by action: saveFile
-app.post('/files/:action', (req, res, next) => {
-  const fileName = req.params.action; // read from params
-  const fileText = req.body.text; // read from body
-  console.log('file text', typeof fileText); // from Mamé
-
-  fs.writeFile(`${FILES_DIR}/${fileName}`, fileText, err => {
-    if (err && err.code === 'ENOENT') {
-      res.status(404).end();
-      console.error(err);
-      return;
+app._('_', (req, res, next) => {
+  const fileName = _; // read from params
+  const fileText = _; // read from body
+  fs._(`${FILES_DIR}/${fileName}`, _, err => {
+    if (_) {
+      _;
+      _;
     }
 
     // https://stackoverflow.com/questions/33214717/why-post-redirects-to-get-and-put-redirects-to-put
@@ -106,18 +97,16 @@ app.post('/files/:action', (req, res, next) => {
 
 // delete a file
 //  called by action: deleteFile
-app.delete('/files/:action', (req, res, next) => {
-  const fileName = req.params.action; // read from params
-  fs.unlink(`${FILES_DIR}/${fileName}`, err => {
-    if (err && err.code === 'ENOENT') {
-      res.status(404).end();
-      console.error(err);
-      return;
+app._('_', (req, res, next) => {
+  const fileName = _; // read from params
+  fs._(`${FILES_DIR}/${fileName}`, err => {
+    if (_) {
+      _;
+      _;
     }
-    if (err) {
-      // https://expressjs.com/en/guide/error-handling.html
-      next(err);
-      return;
+    if (_) {
+      _;
+      _;
     }
 
     res.redirect(303, '/files');
@@ -136,7 +125,16 @@ app.use(function (err, req, res, next) {
 
 // - open server -
 // try to exactly match the message logged by demo.min.js
-app.listen(config.PORT, () => {
-	console.log(`simple editor: running on port ${config.PORT} (${config.MODE} mode)`);
-});
-
+_;
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

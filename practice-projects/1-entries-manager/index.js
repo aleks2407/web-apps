@@ -2,7 +2,7 @@
 _;
 
 // declare constants
-const ENTRIES_PATH = _;
+const ENTRIES_PATH = './entries.json'cd;
 const DOC_STRING = `
 COMMANDS:
 
@@ -30,7 +30,7 @@ FLAGS:
 
 // step 0: log the docs for
 if (process.argv.includes('-h')) {
-  console.log(_);
+  console.log(DOC_STRING);
   // this line tells Node to stop right now, done, end, finished.
   //  it's kind of like an early return, but for a node app
   process.exit(0);
@@ -41,9 +41,9 @@ const entriesManager = (entries, command, key, value) => {
 
   // step 5: make sure command is defined
   //  alert the user and exit early if it is not
-  if (_) {
+  if (command === undefined) {
     console.log(`a command is required  \nSee "node file.js -h"`);
-    _;
+    process.exit(0);;
   }
 
   // step 6: make sure the first argument is one of the 4 supported commands
@@ -130,7 +130,7 @@ const entriesManager = (entries, command, key, value) => {
 // step 2: declare callback that uses main app function
 const readFileCb = (err, entriesString) => {
   // step 4: handle file system error, or execute main app function
-  if (_) {
+  if () {
     _
   }
 
@@ -139,4 +139,4 @@ const readFileCb = (err, entriesString) => {
 };
 
 // step 3: read the stored data and execute the callback
-_;
+fs.readFile(FILE_PATH, 'utf-8', ReadFileCb);;
